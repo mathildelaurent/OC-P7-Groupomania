@@ -10,8 +10,11 @@ module.exports = (req, res, next) => {
             userId: userIdDecodedToken,
         };
 
-        userIdParamsUrl = req.originalUrl.split("=")[1];
+        //userIdParamsUrl = req.originalUrl.split("=")[1];
+        //console.log(userIdDecodedToken);
+        next();
 
+        /*
         if (req._body === true) {
             if (req.body.userId === userIdDecodedToken) {
                 next();
@@ -22,7 +25,7 @@ module.exports = (req, res, next) => {
             next();
         } else {
             throw "erreur identification form-data";
-        }
+        }*/
     } catch (error) {
         res.status(401).json({
             error: "Echec Authentification",

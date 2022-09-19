@@ -1,0 +1,47 @@
+#post-add {
+    background-color: $color-tertiary;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+
+    #menu {
+        @include menu;
+    }
+
+    #creation-form {
+        padding: 5%;
+        .creation-form__item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3%;
+            input {
+                margin-top: 3%;
+            }
+            textarea {
+                margin-top: 3%;
+            }
+            #btn-image {
+                background-color: lighten($color-primary, 35);
+                border: 1px solid black;
+                border-radius: 4px;
+                width: 40%;
+                padding: 2%;
+                cursor: pointer;
+                transition: all 450ms;
+                &:hover {
+                    transform: scale(1.15);
+                }
+            }
+        }
+
+        #btn-submit {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 20%;
+            border: 1px solid black;
+            @include btn;
+        }
+    }
+}

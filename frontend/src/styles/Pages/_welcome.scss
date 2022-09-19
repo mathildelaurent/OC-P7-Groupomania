@@ -1,0 +1,36 @@
+#welcome {
+    background-color: $color-tertiary;
+    padding: 5%;
+    color: white;
+    #menu {
+        @include menu;
+    }
+
+    #posts {
+        #card {
+            border: 1px solid white;
+            padding: 2%;
+            margin: 2%;
+            cursor: pointer;
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            #image {
+                display: flex;
+                img {
+                    margin: auto;
+                    width: 30%;
+                }
+            }
+            #btn {
+                display: flex;
+                justify-content: space-between;
+                margin: auto;
+                width: 20%;
+                padding-top: 3%;
+            }
+        }
+    }
+}

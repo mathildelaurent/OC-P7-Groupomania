@@ -14,11 +14,22 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash,
             });
-            user.save()
-                .then(() =>
-                    res.status(201).json({ message: "Utilisateur créé !" })
-                )
-                .catch((error) => res.status(400).json({ error }));
+            let emailRegExp = new RegExp(
+                "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
+            );
+            let testEmail = emailRegExp.test(req.body.email);
+
+            if (testEmail === false) {
+                return res
+                    .status(401)
+                    .json({ error: "Adresse mail non valide !" });
+            } else {
+                user.save()
+                    .then(() =>
+                        res.status(201).json({ message: "Utilisateur créé !" })
+                    )
+                    .catch((error) => res.status(409).json({ error }));
+            }
         })
         .catch((error) => res.status(500).json({ error }));
 };
@@ -28,7 +39,7 @@ exports.login = (req, res, next) => {
         .then((user) => {
             if (!user) {
                 return res
-                    .status(401)
+                    .status(404)
                     .json({ error: "Utilisateur non trouvé !" });
             }
             bcrypt
@@ -39,13 +50,14 @@ exports.login = (req, res, next) => {
                             .status(401)
                             .json({ error: "Non autorisé !" });
                     }
-                    res.status(200).json({
+                    return res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(
                             { userId: user._id },
                             process.env.secretToken,
                             { expiresIn: "24h" }
                         ),
+                        firstname: user.firstname,
                     });
                 })
                 .catch((error) => res.status(500).json({ error }));

@@ -24,10 +24,8 @@ module.exports = (req, res, next) => {
     if (passwordSchema.validate(req.body.password)) {
         next();
     } else {
-        return res
-            .status(400)
-            .json({
-                error: "Le mot de passe doit contenir min 6 caractères, max 20 caractères, des majuscules, des minuscules, au moins 2 chiffres, sans espace",
-            });
+        return res.status(400).json({
+            error: "Le mot de passe doit contenir min 6 caractères, max 20 caractères, des majuscules, des minuscules, au moins 2 chiffres, sans espace",
+        });
     }
 };

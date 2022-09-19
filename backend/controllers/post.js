@@ -1,9 +1,8 @@
-const sauce = require("../../../P6_laurent_mathilde 2/Project/backend/models/sauce");
 const Post = require("../models/post");
 const fs = require("fs");
 
 exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);
+    const postObject = req.body;
     delete postObject._id;
     delete postObject._userId;
 
@@ -18,8 +17,11 @@ exports.createPost = (req, res, next) => {
         post.save()
             .then(() =>
                 res.status(201).json({
-                    message: "Publication créée !",
-                    contenu: req.body,
+                    title: req.body.title,
+                    content: req.body.content,
+                    imageUrl: `${req.protocol}://${req.get("host")}/images/${
+                        req.file.filename
+                    }`,
                 })
             )
             .catch((error) => res.status(400).json({ error }));
@@ -29,7 +31,12 @@ exports.createPost = (req, res, next) => {
             userId: req.auth.userId,
         });
         post.save()
-            .then(() => res.status(201).json({ message: "Publication créée" }))
+            .then(() =>
+                res.status(201).json({
+                    title: req.body.title,
+                    content: req.body.content,
+                })
+            )
             .catch((error) => res.status(400).json({ error }));
     }
 };
@@ -40,10 +47,17 @@ exports.getAllPosts = (req, res, next) => {
         .catch((error) => res.status(400).json({ error }));
 };
 
+exports.getOnePost = (req, res, next) => {
+    Post.findOne({ _id: req.params.id })
+        .then((post) => res.status(200).json(post))
+        .catch((error) => res.status(404).json({ error }));
+};
+
 exports.modifyPost = (req, res, next) => {
     const postObjet = req.file
         ? {
-              ...JSON.parse(req.body.post),
+              // ...JSON.parse(req.body.post),
+              ...req.body,
               imageUrl: `${req.protocol}://${req.get("host")}/images/${
                   req.file.filename
               }`,
@@ -55,6 +69,7 @@ exports.modifyPost = (req, res, next) => {
                 res.status(403).json({ error: "Non autorisé !" });
             } else {
                 if (req.file) {
+                    // A voir si on peut supprimer le findOne
                     Post.findOne({ _id: req.params.id })
                         .then((post) => {
                             const filename = post.imageUrl.split("/images")[1];
@@ -87,17 +102,34 @@ exports.deletePost = (req, res, next) => {
             if (req.auth.userId != post.userId) {
                 res.status(403).json({ error: "Non autorisé !" });
             } else {
-                const filename = post.imageUrl.split("/images/")[1];
+                if (req.file) {
+                    const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, (error) => {
+                        if (error) throw error;
+                    });
+                }
+                Post.deleteOne({ _id: req.params.id })
+                    .then(() =>
+                        res
+                            .status(204)
+                            .json({ message: "Publication supprimée !" })
+                    )
+                    .catch((error) => res.status(401).json({ error }));
+
+                // ca commence à merder à partir d'ici
+                /*   const filename = post.imageUrl.split("/images/")[1];
                 fs.unlink(`images/${filename}`, () => {
                     Post.deleteOne({ _id: req.params.id })
                         .then(() =>
                             res
-                                .status(200)
+                                .status(204)
                                 .json({ message: "Publication supprimée !" })
                         )
                         .catch((error) => res.status(401).json({ error }));
-                });
+                });*/
             }
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) =>
+            res.status(500).json({ error: "A priori, post est non trouvé" })
+        );
 };

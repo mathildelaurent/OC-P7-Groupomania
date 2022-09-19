@@ -1,0 +1,75 @@
+#connexion {
+    background-color: $color-tertiary;
+    color: white;
+    padding: 5% 0;
+    #presentation {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        h1 {
+            font-size: 40px;
+            span {
+                color: $color-primary;
+            }
+        }
+        p {
+            font-size: 25px;
+            margin: 5%;
+        }
+    }
+    #choice {
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        width: 30%;
+        .choice-btn {
+            @include btn;
+            a {
+                text-decoration: none;
+                color: black;
+            }
+        }
+    }
+    #suggestions {
+        display: flex;
+        width: 35%;
+        padding: 5% 0;
+        margin: auto;
+        ul {
+            margin: auto;
+            li {
+                span {
+                    color: $color-primary;
+                }
+            }
+        }
+    }
+    h2 {
+        text-align: center;
+    }
+    .connexion-form {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+        .connexion-form_item {
+            display: flex;
+            flex-direction: column;
+            margin-top: 5%;
+            label {
+                padding-bottom: 3%;
+            }
+            input {
+                border: 1px solid black;
+                height: 30px;
+            }
+        }
+        #connexion-form__submit {
+            width: 25%;
+            margin: auto;
+            border: 1px solid black;
+            margin: 5% auto;
+            @include btn;
+        }
+    }
+}

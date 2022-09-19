@@ -10,11 +10,11 @@ const postRoutes = require("./routes/post");
 
 const path = require("path");
 
-const limiter = rateLimit({
-    max: 200,
-    windowMs: 60 * 60 * 1000,
-    message: "Too many requests from this IP",
-});
+//const limiter = rateLimit({
+//  max: 200,
+//windowMs: 60 * 60 * 1000,
+//message: "Too many requests from this IP",
+//});
 
 mongoose
     .connect(process.env.connexionMongoDB, {
@@ -26,24 +26,25 @@ mongoose
 
 app.use(express.json());
 app.use(helmet());
-app.use(limiter);
+//app.use(limiter);
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Accept, Content, Content-type, Authorization"
+        "Origin, X-Requested-With, Accept, Content, Content-type, Authorization, type"
     );
     res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     );
     res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+
     next();
 });
 
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/api/images", express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;
