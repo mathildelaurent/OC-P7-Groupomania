@@ -1,15 +1,15 @@
 import { useParams } from "react-router";
 import { useContext, useState, useCallback, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { NavLink } from "react-router-dom";
 
 export default function CardID() {
     const { id } = useParams();
     const { storedUsers } = useContext(AuthContext);
-    console.log(id);
     const [data, setData] = useState([]);
+    const userPost = data.userId;
+    console.log(userPost);
     console.log(data);
-    /*  const url = "http://localhost:3000/api/posts" + id;
-    console.log(url);*/
 
     const fetchHandler = useCallback(async () => {
         try {
@@ -56,27 +56,45 @@ export default function CardID() {
                 window.location.href = "../welcome";
             }
         });
-        /*  .then(() => {
-                window.location.href = "../welcome";
-            });*/
     }
 
     function handleModify() {
-        fetch(`http://localhost:3000/api/posts/${data._id}`, {
-            method: "PUT",
+        window.location.href = `./ModifyPost/${data._id}`;
+    }
+
+    function handleOpinionLike(evt) {
+        const like = evt.target;
+        like.classList.toggle("switch-like");
+
+        fetch(`http://localhost:3000/api/posts/${data._id}/like`, {
+            method: "POST",
             headers: {
+                "Content-type": "application/json",
                 Authorization: `Bearer ${storedUsers.token}`,
             },
+            body: JSON.stringify({ like: 1 }),
         }).then((response) => {
-            return response.json();
+            console.log(response);
         });
-        /*   .then(() => {
-                window.location.href = "./welcome";
-            });*/
+    }
+
+    function handleOpinionDislike(evt) {
+        const dislike = evt.target;
+        dislike.classList.toggle("switch-dislike");
     }
 
     return (
-        <>
+        <section id="userPost">
+            <p className="btn-menu">
+                <NavLink
+                    to="/welcome"
+                    className={({ isActive }) =>
+                        isActive ? "activeLink" : undefined
+                    }
+                >
+                    Retour à l'accueil
+                </NavLink>
+            </p>
             <h2 id="title">{data.title}</h2>
             <p id="content">{data.content}</p>
             <div id="image">
@@ -90,6 +108,16 @@ export default function CardID() {
                     Supprimer
                 </button>
             </div>
-        </>
+            <div id="opinion">
+                <i
+                    className="fa-regular fa-thumbs-up"
+                    onClick={(evt) => handleOpinionLike(evt)}
+                ></i>
+                <i
+                    className="fa-regular fa-thumbs-down"
+                    onClick={(evt) => handleOpinionDislike(evt)}
+                ></i>
+            </div>
+        </section>
     );
 }

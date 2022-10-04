@@ -3,16 +3,10 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Login(props) {
     const { handleLogin } = props;
-    // const [user, setUser] = useState({
-    //   email: "",
-    // password: "",
-    //});
-
     const { user } = useContext(AuthContext);
     const { storedUsers } = useContext(AuthContext);
-    console.log(user);
-    console.log(storedUsers);
     const { userLogged } = useContext(AuthContext);
+    const [isVisible, setIsVisible] = useState(false);
 
     function handleSubmit(evt) {
         evt.preventDefault();
@@ -32,17 +26,9 @@ export default function Login(props) {
             })
             .then((datas) => {
                 if (!datas.userId) {
-                    console.log("t'as gouru !");
                     alert("L'e-mail et/ou le mot de passe sont incorrects !");
                 } else {
-                    console.log(datas);
                     userLogged(datas);
-
-                    //  handleLogin(datas);
-                    // setUser({
-                    //   email: "",
-                    // password: "",
-                    // });
                     window.location.href = "./welcome";
                 }
             });
@@ -51,6 +37,10 @@ export default function Login(props) {
     function handleChange(evt) {
         const { name, value } = evt.target;
         //   setUser({ ...user, [name]: value });
+    }
+
+    function handleVisible() {
+        setIsVisible(!isVisible);
     }
 
     return (
@@ -77,13 +67,21 @@ export default function Login(props) {
                 <div className="connexion-form_item">
                     <label htmlFor="password">Mot de passe : </label>
                     <input
-                        type="text"
+                        type={isVisible ? "text" : "password"}
                         name="password"
                         id="password"
                         value={user.password}
                         onChange={(evt) => handleChange(evt)}
                         required
                     />
+                    <i
+                        className={
+                            isVisible
+                                ? "fa-solid fa-eye"
+                                : "fa-solid fa-eye-slash"
+                        }
+                        onClick={() => handleVisible()}
+                    ></i>
                 </div>
                 <button type="submit" id="connexion-form__submit">
                     Se connecter

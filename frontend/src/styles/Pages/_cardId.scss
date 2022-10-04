@@ -1,0 +1,88 @@
+#userPost {
+    background-color: $color-tertiary;
+    color: white;
+    padding: 5%;
+    .btn-menu {
+        text-align: center;
+        width: 15%;
+        margin: auto;
+        background-color: white;
+        padding: 2%;
+        border-radius: 10px 0 10px 0;
+        cursor: pointer;
+        transition: all 450ms;
+        &:hover {
+            transform: scale(1.15);
+            box-shadow: 1px 1px 5px 5px lighten($color-primary, 25);
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+    #title {
+        font-size: 40px;
+        text-align: center;
+        margin-top: 5%;
+        border-bottom: 1px solid white;
+    }
+    #content {
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    img {
+        display: flex;
+        width: 30%;
+        margin: auto;
+    }
+    #btn {
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+        width: 30%;
+        margin-top: 5%;
+        #modify-post {
+            //   background-color: rgb(133, 174, 133);
+            background-color: rgb(93, 155, 241);
+            color: white;
+            border: none;
+            padding: 5%;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 450ms;
+            &:hover {
+                transform: scale(1.13);
+                //   background-color: darken($color-secondary, 15);
+                box-shadow: 2px 2px 2px 3px rgb(12, 46, 101);
+            }
+        }
+        #delete-post {
+            background-color: rgb(169, 46, 44);
+            color: white;
+            border: none;
+            padding: 5%;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 450ms;
+            &:hover {
+                transform: scale(1.13);
+                box-shadow: 2px 2px 2px 3px rgb(92, 26, 26);
+            }
+        }
+    }
+    #opinion {
+        display: flex;
+        margin-top: 5%;
+        .fa-regular {
+            font-size: 30px;
+            margin-left: 5%;
+            cursor: pointer;
+        }
+        .switch-like {
+            color: green;
+        }
+        .switch-dislike {
+            color: red;
+        }
+    }
+}

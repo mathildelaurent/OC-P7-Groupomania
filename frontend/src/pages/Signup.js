@@ -14,19 +14,24 @@ export default function Signup() {
                 email: document.getElementById("email").value,
                 password: document.getElementById("password").value,
             }),
-        }).then((datas) => {
-            console.log(datas);
-            if (datas.ok === true) {
-                window.location.href = "/welcome";
-            } else {
-                if (datas.status === 409) {
-                    alert("Ce compte existe déjà");
-                }
-                if (datas.status === 400) {
-                    alert("Le mot de passe n'est pas assez fort !");
-                }
-            }
-        });
+        })
+            .then((response) => {
+                return response.json();
+                //  if (datas.ok === true) {
+                //  window.location.href = "/login";
+                //} else {
+                //  if (datas.status === 409) {
+                //    alert("Ce compte existe déjà");
+                //}
+                //if (datas.status === 400) {
+                //  alert("Le mot de passe n'est pas assez fort !");
+                // }
+                // }
+            })
+            .then((datas) => {
+                console.log(datas);
+                window.location.href = "/login";
+            });
     }
 
     return (

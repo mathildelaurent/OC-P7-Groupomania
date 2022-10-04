@@ -1,7 +1,9 @@
 const Post = require("../models/post");
 const fs = require("fs");
+const console = require("console");
 
 exports.createPost = (req, res, next) => {
+    const date = new Date();
     const postObject = req.body;
     delete postObject._id;
     delete postObject._userId;
@@ -10,6 +12,7 @@ exports.createPost = (req, res, next) => {
         const post = new Post({
             ...postObject,
             userId: req.auth.userId,
+            date: date,
             imageUrl: `${req.protocol}://${req.get("host")}/images/${
                 req.file.filename
             }`,
@@ -17,6 +20,8 @@ exports.createPost = (req, res, next) => {
         post.save()
             .then(() =>
                 res.status(201).json({
+                    date: date,
+                    from: req.auth.userId,
                     title: req.body.title,
                     content: req.body.content,
                     imageUrl: `${req.protocol}://${req.get("host")}/images/${
@@ -29,10 +34,12 @@ exports.createPost = (req, res, next) => {
         const post = new Post({
             ...postObject,
             userId: req.auth.userId,
+            date: date,
         });
         post.save()
             .then(() =>
                 res.status(201).json({
+                    date: date,
                     title: req.body.title,
                     content: req.body.content,
                 })
@@ -56,44 +63,45 @@ exports.getOnePost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
     const postObjet = req.file
         ? {
-              // ...JSON.parse(req.body.post),
               ...req.body,
               imageUrl: `${req.protocol}://${req.get("host")}/images/${
                   req.file.filename
               }`,
           }
-        : { ...req.body };
+        : {
+              ...req.body,
+              imageUrl: "",
+          };
+    console.log(req.params.id);
     Post.findOne({ _id: req.params.id })
         .then((post) => {
-            if (post.userId != req.auth.userId) {
+            // ou si req.auth.userId != admin
+            if (req.auth.userId != post.userId) {
                 res.status(403).json({ error: "Non autorisé !" });
             } else {
                 if (req.file) {
-                    // A voir si on peut supprimer le findOne
-                    Post.findOne({ _id: req.params.id })
-                        .then((post) => {
-                            const filename = post.imageUrl.split("/images")[1];
-                            fs.unlink(`images/${filename}`, (error) => {
-                                if (error) throw error;
-                            });
-                        })
-                        .catch((error) => res.status(404).json({ error }));
+                    // Permet de supprimer l'image du fichier images
+                    const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, () => {});
                 }
-                Post.updateOne(
-                    { _id: req.params.id },
-                    { ...postObjet, _id: req.params.id }
-                )
-                    .then(() =>
-                        res
-                            .status(200)
-                            .json({ message: "Publication modifiée !" })
-                    )
-                    .catch((error) => res.status(401).json({ error }));
+                if (!req.file && post.imageUrl) {
+                    // Permet de supprimer l'image du fichier images
+                    const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        console.log("fichier effacé");
+                    });
+                }
             }
+            Post.updateOne(
+                { _id: req.params.id },
+                { ...postObjet, _id: req.params.id }
+            )
+                .then(() => {
+                    res.status(200).json({ message: "Publication modifiée !" });
+                })
+                .catch((error) => res.status(400).json({ error }));
         })
-        .catch((error) => {
-            res.status(400).json({ error });
-        });
+        .catch((error) => res.status(404).json({ error }));
 };
 
 exports.deletePost = (req, res, next) => {
@@ -102,7 +110,7 @@ exports.deletePost = (req, res, next) => {
             if (req.auth.userId != post.userId) {
                 res.status(403).json({ error: "Non autorisé !" });
             } else {
-                if (req.file) {
+                if (post.imageUrl) {
                     const filename = post.imageUrl.split("/images/")[1];
                     fs.unlink(`images/${filename}`, (error) => {
                         if (error) throw error;
@@ -132,4 +140,103 @@ exports.deletePost = (req, res, next) => {
         .catch((error) =>
             res.status(500).json({ error: "A priori, post est non trouvé" })
         );
+};
+
+exports.opinionPost = (req, res, next) => {
+    console.log(req.body);
+    Post.findOne({ _id: req.params.id })
+        .then((post) => {
+            switch (req.body.like) {
+                case 1:
+                    if (
+                        !post.usersLiked.includes(req.auth.userId) &&
+                        !post.usersDisliked.includes(req.auth.userId) &&
+                        req.body.like === 1
+                    ) {
+                        Post.updateOne(
+                            { _id: req.params.id },
+                            {
+                                $inc: { likes: 1 },
+                                $push: { usersLiked: req.auth.userId },
+                            }
+                        )
+                            .then(() =>
+                                res.status(201).json({
+                                    message:
+                                        "L'utilisateur a enregistré un Like !",
+                                })
+                            )
+                            .catch((error) => res.status(400).json({ error }));
+                    } else {
+                        return res.status(400).json({
+                            error: "L'utilisateur a déjà donné son opinion !",
+                        });
+                    }
+                    break;
+
+                case -1:
+                    if (
+                        !post.usersDisliked.includes(req.auth.userId) &&
+                        !post.usersLiked.includes(req.auth.userId) &&
+                        req.body.like === -1
+                    ) {
+                        Post.updateOne(
+                            { _id: req.params.id },
+                            {
+                                $inc: { dislikes: 1 },
+                                $push: { usersDisliked: req.auth.userId },
+                            }
+                        )
+                            .then(() =>
+                                res.status(201).json({
+                                    message:
+                                        "L'utilisateur a enregistré un dislike !",
+                                })
+                            )
+                            .catch((error) => res.status(400).json({ error }));
+                    } else {
+                        return res.status(400).json({
+                            error: "L'utilisateur a déjà donné son opinion !",
+                        });
+                    }
+                    break;
+
+                case 0:
+                    if (post.usersLiked.includes(req.auth.userId)) {
+                        Post.updateOne(
+                            { _id: req.params.id },
+                            {
+                                $inc: { likes: -1 },
+                                $pull: { usersLiked: req.auth.userId },
+                            }
+                        )
+                            .then(() =>
+                                res.status(201).json({
+                                    message:
+                                        "L'utilisateur a annulé son like !",
+                                })
+                            )
+                            .catch((error) => res.status(400).json({ error }));
+                    }
+
+                    if (post.usersDisliked.includes(req.auth.userId)) {
+                        Post.updateOne(
+                            { _id: req.params.id },
+                            {
+                                $inc: { dislikes: -1 },
+                                $pull: { usersDisliked: req.auth.userId },
+                            }
+                        )
+                            .then(() =>
+                                res.status(201).json({
+                                    message:
+                                        "L'utilisateur a annulé son dislike !",
+                                })
+                            )
+                            .catch((error) => res.status(400).json({ error }));
+                    }
+                    break;
+            }
+        })
+        .catch((error) => res.status(404).json({ error }));
 };

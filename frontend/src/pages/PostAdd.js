@@ -36,22 +36,6 @@ export default function PostAdd(props) {
             .then(() => {
                 window.location.href = window.location.href;
             });
-        /*  .catch((error) => {
-                console.log(error);
-            });*/
-
-        // fetch("http://localhost:3000/api/posts", {
-        //   method: "POST",
-        // headers: {
-        //   Authorization: `Bearer ${users.token}`,
-        // Accept: "application/json",
-        // "Content-type": "multipart/form-data",
-        //type: "formdata",
-        // },
-        //body: formData,
-        // }).then((response) => {
-        //   console.log(response);
-        //});
     }
 
     function handleChange(evt) {
@@ -64,8 +48,6 @@ export default function PostAdd(props) {
         console.log(evt.target.files[0]);
         if (evt.target && evt.target.files[0]) {
             setFile(evt.target.files[0]);
-
-            //formData.append("image", evt.target.files[0]);
         }
     }
 
@@ -132,7 +114,6 @@ export default function PostAdd(props) {
                         name="image"
                         id="image"
                         accept="image/*"
-                        //  value={file.image}
                         onChange={(evt) => handleChangeFile(evt)}
                     />
                 </div>

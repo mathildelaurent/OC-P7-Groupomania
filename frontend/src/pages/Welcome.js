@@ -1,12 +1,18 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import useLocalStorage from "../hooks/useLocalStorage";
 import PostCard from "../components/PostCard";
 
 export default function Welcome() {
     const { storedUsers } = useContext(AuthContext);
     const [data, setData] = useState([]);
-    console.log(data);
+    const { userLogged } = useContext(AuthContext);
+    const STORAGE_KEY_POSTS = "posts";
+    const [storedPosts, setStoredPosts] = useLocalStorage(
+        STORAGE_KEY_POSTS,
+        []
+    );
 
     const fetchHandler = useCallback(async () => {
         try {
@@ -20,7 +26,7 @@ export default function Welcome() {
             const dataResponse = await response.json();
 
             if (response.ok) {
-                setData(dataResponse);
+                setStoredPosts(dataResponse.reverse());
             } else {
                 throw new Error(dataResponse.error);
             }
@@ -33,6 +39,16 @@ export default function Welcome() {
     useEffect(() => {
         fetchHandler();
     }, [fetchHandler]);
+
+    function handleLogOut() {
+        console.log(storedUsers);
+        userLogged({
+            firstname: "",
+            token: "",
+            userId: "",
+        });
+        window.location.href = "./";
+    }
 
     return (
         <section id="welcome">
@@ -50,20 +66,13 @@ export default function Welcome() {
                         Créer une publication
                     </NavLink>
                 </p>
-                <p className="btn-menu">
-                    <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                            isActive ? "activeLink" : undefined
-                        }
-                    >
-                        Se déconnecter
-                    </NavLink>
+                <p className="btn-menu" onClick={() => handleLogOut()}>
+                    Se déconnecter
                 </p>
             </div>
 
             <div id="posts">
-                {data.map((post) => (
+                {storedPosts.map((post) => (
                     <PostCard post={post} />
                 ))}
             </div>

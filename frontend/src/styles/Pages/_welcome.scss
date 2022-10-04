@@ -4,6 +4,7 @@
     color: white;
     #menu {
         @include menu;
+        color: black;
     }
 
     #posts {
@@ -11,25 +12,98 @@
             border: 1px solid white;
             padding: 2%;
             margin: 2%;
-            cursor: pointer;
-            p {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+            transition: all 450ms;
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: #d7d7d7 0 0 15px;
             }
-            #image {
-                display: flex;
-                img {
-                    margin: auto;
-                    width: 30%;
+            #card-container {
+                p {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                #image {
+                    display: flex;
+                    margin-top: 5%;
+                    img {
+                        margin: auto;
+                        width: 15%;
+                    }
                 }
             }
             #btn {
-                display: flex;
-                justify-content: space-between;
+                display: block;
+                justify-content: space-around;
+
                 margin: auto;
-                width: 20%;
-                padding-top: 3%;
+                width: 30%;
+                margin-top: 5%;
+                #modify-post {
+                    //   background-color: rgb(133, 174, 133);
+                    background-color: rgb(93, 155, 241);
+                    margin-right: 5%;
+                    color: white;
+                    border: none;
+                    padding: 5%;
+                    font-size: 15px;
+                    cursor: pointer;
+                    transition: all 450ms;
+                    &:hover {
+                        transform: scale(1.13);
+                        //   background-color: darken($color-secondary, 15);
+                        box-shadow: 2px 2px 2px 3px rgb(12, 46, 101);
+                    }
+                }
+                #delete-post {
+                    background-color: rgb(169, 46, 44);
+                    color: white;
+                    border: none;
+                    padding: 5%;
+                    font-size: 15px;
+                    cursor: pointer;
+                    transition: all 450ms;
+                    &:hover {
+                        transform: scale(1.13);
+                        box-shadow: 2px 2px 2px 3px rgb(92, 26, 26);
+                    }
+                }
+            }
+            #unvisible {
+                display: none;
+            }
+            #opinion {
+                display: flex;
+                margin-top: 5%;
+
+                .fa-regular {
+                    font-size: 30px;
+                    margin-left: 5%;
+                    cursor: pointer;
+                }
+                .switch-like {
+                    color: green;
+                }
+                .switch-dislike {
+                    color: red;
+                }
+                .opinion-error {
+                    font-size: 12px;
+                    margin-left: auto;
+                    padding-top: 2%;
+                }
+                #error-like {
+                    display: none;
+                    font-size: 12px;
+                    margin-left: auto;
+                    padding-top: 2%;
+                }
+                #error-dislike {
+                    display: none;
+                    font-size: 12px;
+                    margin-left: auto;
+                    padding-top: 2%;
+                }
             }
         }
     }

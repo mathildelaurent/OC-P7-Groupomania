@@ -26,7 +26,10 @@ exports.signup = (req, res, next) => {
             } else {
                 user.save()
                     .then(() =>
-                        res.status(201).json({ message: "Utilisateur créé !" })
+                        res.status(201).json({
+                            message: "Utilisateur créé !",
+                            user,
+                        })
                     )
                     .catch((error) => res.status(409).json({ error }));
             }
@@ -58,6 +61,8 @@ exports.login = (req, res, next) => {
                             { expiresIn: "24h" }
                         ),
                         firstname: user.firstname,
+                        lastname: user.lastname,
+                        job: user.job,
                     });
                 })
                 .catch((error) => res.status(500).json({ error }));
