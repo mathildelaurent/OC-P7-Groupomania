@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const user = require("../models/user");
 require("dotenv").config();
 
 exports.signup = (req, res, next) => {
@@ -8,13 +9,16 @@ exports.signup = (req, res, next) => {
         .hash(req.body.password, 10)
         .then((hash) => {
             const user = new User({
+                // userId: user._id,
                 lastname: req.body.lastname,
                 firstname: req.body.firstname,
                 job: req.body.job,
                 email: req.body.email,
                 password: hash,
+                isAdmin: 0,
             });
-            let emailRegExp = new RegExp(
+            console.log(user);
+            /* let emailRegExp = new RegExp(
                 "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
             );
             let testEmail = emailRegExp.test(req.body.email);
@@ -23,16 +27,16 @@ exports.signup = (req, res, next) => {
                 return res
                     .status(401)
                     .json({ error: "Adresse mail non valide !" });
-            } else {
-                user.save()
-                    .then(() =>
-                        res.status(201).json({
-                            message: "Utilisateur créé !",
-                            user,
-                        })
-                    )
-                    .catch((error) => res.status(409).json({ error }));
-            }
+            } else {*/
+            user.save()
+                .then(() =>
+                    res.status(201).json({
+                        message: "Utilisateur créé !",
+                        user,
+                    })
+                )
+                .catch((error) => res.status(409).json({ error }));
+            //}
         })
         .catch((error) => res.status(500).json({ error }));
 };
@@ -63,6 +67,7 @@ exports.login = (req, res, next) => {
                         firstname: user.firstname,
                         lastname: user.lastname,
                         job: user.job,
+                        isAdmin: user.isAdmin,
                     });
                 })
                 .catch((error) => res.status(500).json({ error }));

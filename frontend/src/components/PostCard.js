@@ -11,7 +11,6 @@ export default function PostsCard(props) {
     const { storedUsers } = useContext(AuthContext);
 
     const date = new Date(post.date);
-    console.log(date.toLocaleString());
 
     function handleModify() {
         window.location.href = `./ModifyPost/${post._id}`;
@@ -131,7 +130,7 @@ export default function PostsCard(props) {
     return (
         <div id="card">
             <div id="card-container">
-                <p id="user-post">De: XXXX</p>
+                <p id="user-post">De: {post.from}</p>
                 <p id="creation-date">Date: {date.toLocaleString()}</p>
                 <h2 id="title">{post.title}</h2>
                 <p id="content">{post.content}</p>
@@ -139,7 +138,14 @@ export default function PostsCard(props) {
                     <img src={post.imageUrl} alt="" />
                 </div>
             </div>
-            <div id={post.userId === storedUsers.userId ? "btn" : "unvisible"}>
+            <div
+                id={
+                    post.userId === storedUsers.userId ||
+                    storedUsers.isAdmin === 1
+                        ? "btn"
+                        : "unvisible"
+                }
+            >
                 <button id="modify-post" onClick={() => handleModify()}>
                     Modifier
                 </button>

@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function PostAdd(props) {
     const { storedUsers } = useContext(AuthContext);
+    console.log(storedUsers);
 
     const [post, setPost] = useState({
         title: "",

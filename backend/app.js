@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bcrypt = require("bcrypt");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
@@ -9,6 +10,7 @@ const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
 
 const path = require("path");
+const user = require("./models/user");
 
 //const limiter = rateLimit({
 //  max: 200,
@@ -46,5 +48,19 @@ app.use((req, res, next) => {
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
+user.findOne({ email: "admin@test.com" }).then((admin) => {
+    if (!admin) {
+        var hash = bcrypt.hashSync("@Dministrateur01", 10);
+        const admin = new user({
+            lastname: "Admin",
+            firstname: "Admin",
+            job: "Administration",
+            email: "admin@test.com",
+            password: hash,
+            isAdmin: 1,
+        });
+        admin.save();
+    }
+});
 
 module.exports = app;

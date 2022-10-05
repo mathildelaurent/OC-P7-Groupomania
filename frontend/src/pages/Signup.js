@@ -17,16 +17,6 @@ export default function Signup() {
         })
             .then((response) => {
                 return response.json();
-                //  if (datas.ok === true) {
-                //  window.location.href = "/login";
-                //} else {
-                //  if (datas.status === 409) {
-                //    alert("Ce compte existe déjà");
-                //}
-                //if (datas.status === 400) {
-                //  alert("Le mot de passe n'est pas assez fort !");
-                // }
-                // }
             })
             .then((datas) => {
                 console.log(datas);
