@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import PostAdd from "./pages/PostAdd";
 import CardId from "./components/CardId";
 import ModifyPost from "./components/ModifyPost";
+import MentionsLegales from "./components/MentionsLegales";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/postadd" element={<PostAdd />} />
                 <Route path="/CardId/:id" element={<CardId />} />
                 <Route path="/ModifyPost/:id" element={<ModifyPost />} />
+                <Route path="/mentionslegales" element={<MentionsLegales />} />
             </Routes>
             <Footer />
         </>

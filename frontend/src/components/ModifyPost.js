@@ -1,24 +1,21 @@
 import { useParams } from "react-router";
 import { useContext, useState, useCallback, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 export default function ModifyPost() {
     const { id } = useParams();
     const { storedUsers } = useContext(AuthContext);
     const [data, setData] = useState([]);
-    console.log(data);
-    const [newPost, setNewPost] = useState({
-        title: data.title,
-        content: data.content,
-    });
     const [newFile, setNewFile] = useState();
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
+    const [imageUrl, setImageUrl] = useState();
+    console.log(imageUrl);
 
     const formData = new FormData();
-    formData.append("title", newPost.title);
-    formData.append("content", newPost.content);
+    formData.append("title", title);
+    formData.append("content", content);
     formData.append("image", newFile);
 
     const fetchHandler = useCallback(async () => {
@@ -39,6 +36,7 @@ export default function ModifyPost() {
                 setData(dataResponse);
                 setTitle(dataResponse.title);
                 setContent(dataResponse.content);
+                setImageUrl(dataResponse.imageUrl);
             } else {
                 throw new Error(dataResponse.error);
             }
@@ -53,25 +51,29 @@ export default function ModifyPost() {
     }, [fetchHandler]);
 
     function handleChangeTitle(evt) {
-        console.log(evt.target.value);
         setTitle(evt.target.value);
-        const { name, value } = evt.target;
-        setNewPost({ ...newPost, [name]: value });
     }
 
     function handleChangeContent(evt) {
-        console.log(evt.target);
         setContent(evt.target.value);
-        const { name, value } = evt.target;
-        setNewPost({ ...newPost, [name]: value });
     }
 
     function handleChangeFile(evt) {
         console.log(evt);
-        console.log(evt.target.files[0]);
-        if (evt.target && evt.target.files[0]) {
+        console.log(evt.target.files);
+        if (/*evt.target && */ evt.target.files[0]) {
             setNewFile(evt.target.files[0]);
+            document
+                .getElementById("firstImage")
+                .parentNode.removeChild(document.getElementById("firstImage"));
         }
+    }
+
+    function handleClose() {
+        document
+            .getElementById("firstImage")
+            .parentNode.removeChild(document.getElementById("firstImage"));
+        setImageUrl("");
     }
 
     function handleSubmit(evt) {
@@ -94,7 +96,17 @@ export default function ModifyPost() {
     }
 
     return (
-        <>
+        <body id="modify-post">
+            <p className="btn-menu">
+                <NavLink
+                    to="/welcome"
+                    className={({ isActive }) =>
+                        isActive ? "activeLink" : "undefined"
+                    }
+                >
+                    Retour à l'accueil
+                </NavLink>
+            </p>
             <form
                 method="POST"
                 id="creation-form"
@@ -125,7 +137,13 @@ export default function ModifyPost() {
                         required
                     />
                 </div>
-
+                <div id="firstImage">
+                    <img src={imageUrl} id="image" name="image" alt=""></img>
+                    <i
+                        class={imageUrl ? "fa-regular fa-rectangle-xmark" : ""}
+                        onClick={() => handleClose()}
+                    ></i>
+                </div>
                 <div className="creation-form__item">
                     <label htmlFor="image">Ajouter une image</label>
                     <input
@@ -141,6 +159,6 @@ export default function ModifyPost() {
                     Publier
                 </button>
             </form>
-        </>
+        </body>
     );
 }

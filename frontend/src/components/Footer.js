@@ -5,9 +5,9 @@ export default function Footer() {
     return (
         <footer>
             <div id="nav-footer">
-                <p>Mentions légales</p>
+                <a href="./mentionslegales">Mentions légales</a>
                 <img src={logo} alt="Logo Groupomania" />
-                <p>Contact</p>
+                <a href="mailto: contact@test.com">Contact</a>
             </div>
 
             <div id="copyright">

@@ -18,10 +18,14 @@
                 box-shadow: #d7d7d7 0 0 15px;
             }
             #card-container {
-                p {
+                #content {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    cursor: pointer;
+                }
+                #content-click {
+                    cursor: pointer;
                 }
                 #image {
                     display: flex;
@@ -35,12 +39,10 @@
             #btn {
                 display: block;
                 justify-content: space-around;
-
                 margin: auto;
                 width: 30%;
                 margin-top: 5%;
                 #modify-post {
-                    //   background-color: rgb(133, 174, 133);
                     background-color: rgb(93, 155, 241);
                     margin-right: 5%;
                     color: white;

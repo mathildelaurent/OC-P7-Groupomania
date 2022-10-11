@@ -8,7 +8,7 @@ header {
   display: flex;
   border-bottom: 3px solid #fd2d01;
 }
-header img {
+header a {
   margin: auto;
 }
 
@@ -151,18 +151,6 @@ header img {
 #post-add #creation-form .creation-form__item textarea {
   margin-top: 3%;
 }
-#post-add #creation-form .creation-form__item #btn-image {
-  background-color: #ffbfb2;
-  border: 1px solid black;
-  border-radius: 4px;
-  width: 40%;
-  padding: 2%;
-  cursor: pointer;
-  transition: all 450ms;
-}
-#post-add #creation-form .creation-form__item #btn-image:hover {
-  transform: scale(1.15);
-}
 #post-add #creation-form #btn-submit {
   display: flex;
   justify-content: center;
@@ -218,10 +206,14 @@ header img {
   transform: scale(1.05);
   box-shadow: #d7d7d7 0 0 15px;
 }
-#welcome #posts #card #card-container p {
+#welcome #posts #card #card-container #content {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
+}
+#welcome #posts #card #card-container #content-click {
+  cursor: pointer;
 }
 #welcome #posts #card #card-container #image {
   display: flex;
@@ -299,6 +291,71 @@ header img {
   font-size: 12px;
   margin-left: auto;
   padding-top: 2%;
+}
+
+#modify-post {
+  background-color: #4e5166;
+  padding: 5%;
+}
+#modify-post .btn-menu {
+  width: 20%;
+  text-align: center;
+  margin: auto;
+  background-color: white;
+  padding: 3%;
+  border-radius: 10px 0 10px 0;
+  cursor: pointer;
+  transition: all 450ms;
+}
+#modify-post .btn-menu:hover {
+  transform: scale(1.15);
+  box-shadow: 1px 1px 5px 5px #fe957f;
+}
+#modify-post .btn-menu a {
+  text-decoration: none;
+  color: black;
+}
+#modify-post #creation-form {
+  padding: 5%;
+}
+#modify-post #creation-form .creation-form__item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+}
+#modify-post #creation-form .creation-form__item label {
+  color: white;
+}
+#modify-post #creation-form .creation-form__item input {
+  margin-top: 3%;
+}
+#modify-post #creation-form .creation-form__item textarea {
+  margin-top: 3%;
+}
+#modify-post #creation-form #firstImage {
+  display: flex;
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+#modify-post #creation-form #firstImage #image {
+  width: 50%;
+  margin: auto;
+}
+#modify-post #creation-form #btn-submit {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 20%;
+  border: 1px solid black;
+  background-color: #ffd7d7;
+  padding: 5%;
+  cursor: pointer;
+  transition: all 450ms;
+}
+#modify-post #creation-form #btn-submit:hover {
+  transform: scale(1.13);
+  background-color: #ff8b8b;
+  box-shadow: 2px 2px 2px 3px #491e1e;
 }
 
 #userPost {
@@ -388,6 +445,51 @@ header img {
   color: red;
 }
 
+#mentions-legales {
+  background-color: #4e5166;
+  color: white;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+}
+#mentions-legales #btn-menu {
+  width: 20%;
+  text-align: center;
+  background-color: white;
+  padding: 3%;
+  margin: auto;
+  border-radius: 10px 0 10px 0;
+  cursor: pointer;
+  transition: all 450ms;
+}
+#mentions-legales #btn-menu a {
+  text-decoration: none;
+  color: black;
+}
+#mentions-legales #btn-menu:hover {
+  transform: scale(1.15);
+  box-shadow: 1px 1px 5px 5px #fe957f;
+}
+#mentions-legales #mentions-terms {
+  margin-top: 5%;
+}
+#mentions-legales #mentions-terms h1 {
+  font-size: 40px;
+  color: #fd2d01;
+  text-align: center;
+}
+#mentions-legales #mentions-terms .title {
+  border-bottom: 1px solid white;
+  font-size: 25px;
+  color: #fd2d01;
+}
+#mentions-legales #mentions-terms p {
+  text-align: justify;
+}
+#mentions-legales #mentions-terms .link {
+  color: white;
+}
+
 footer {
   display: flex;
   flex-direction: column;
@@ -399,6 +501,10 @@ footer #nav-footer {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+footer #nav-footer a {
+  text-decoration: none;
+  color: black;
 }
 footer #copyright {
   text-align: center;
@@ -432,8 +538,40 @@ footer #copyright {
     text-align: center;
   }
 
+  #welcome #menu {
+    flex-direction: column;
+    text-align: center;
+  }
+  #welcome #menu .btn-menu {
+    margin-top: 5%;
+  }
+  #welcome #posts #card #card-container h2 {
+    font-size: 20px;
+  }
+  #welcome #posts #card #card-container p {
+    font-size: 12px;
+  }
+  #welcome #posts #card #btn {
+    text-align: center;
+  }
+  #welcome #posts #card #btn #delete-post {
+    margin-top: 10%;
+  }
+  #welcome #posts #card #opinion .fa-regular {
+    font-size: 20px;
+  }
+
+  #post-add #menu {
+    flex-direction: column;
+    text-align: center;
+  }
+  #post-add #menu .btn-menu {
+    margin-top: 5%;
+  }
+
   footer {
     padding-bottom: 5%;
+    padding-top: 5%;
   }
   footer #nav-footer {
     flex-direction: column;

@@ -21,18 +21,6 @@
             textarea {
                 margin-top: 3%;
             }
-            #btn-image {
-                background-color: lighten($color-primary, 35);
-                border: 1px solid black;
-                border-radius: 4px;
-                width: 40%;
-                padding: 2%;
-                cursor: pointer;
-                transition: all 450ms;
-                &:hover {
-                    transform: scale(1.15);
-                }
-            }
         }
 
         #btn-submit {

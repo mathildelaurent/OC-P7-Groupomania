@@ -8,55 +8,57 @@ exports.createPost = (req, res, next) => {
     delete postObject._id;
     delete postObject._userId;
 
-    User.findOne({ _id: req.auth.userId }).then((user) => {
-        if (!user) {
-            return res
-                .status(404)
-                .json({ message: "Utilisateur non trouvé !" });
-        } else {
-            if (req.file) {
-                const post = new Post({
-                    ...postObject,
-                    userId: req.auth.userId,
-                    from: user.firstname,
-                    date: date,
-                    imageUrl: `${req.protocol}://${req.get("host")}/images/${
-                        req.file.filename
-                    }`,
-                });
-                post.save()
-                    .then(() =>
-                        res.status(201).json({
-                            date: date,
-                            from: user.firstname,
-                            title: req.body.title,
-                            content: req.body.content,
-                            imageUrl: `${req.protocol}://${req.get(
-                                "host"
-                            )}/images/${req.file.filename}`,
-                        })
-                    )
-                    .catch((error) => res.status(400).json({ error }));
+    User.findOne({ _id: req.auth.userId })
+        .then((user) => {
+            if (!user) {
+                return res
+                    .status(404)
+                    .json({ message: "Utilisateur non trouvé !" });
             } else {
-                const post = new Post({
-                    ...postObject,
-                    userId: req.auth.userId,
-                    from: user.firstname,
-                    date: date,
-                });
-                post.save()
-                    .then(() =>
-                        res.status(201).json({
-                            date: date,
-                            from: user.firstname,
-                            title: req.body.title,
-                            content: req.body.content,
-                        })
-                    )
-                    .catch((error) => res.status(400).json({ error }));
+                if (req.file) {
+                    const post = new Post({
+                        ...postObject,
+                        userId: req.auth.userId,
+                        from: user.firstname,
+                        date: date,
+                        imageUrl: `${req.protocol}://${req.get(
+                            "host"
+                        )}/images/${req.file.filename}`,
+                    });
+                    post.save()
+                        .then(() =>
+                            res.status(201).json({
+                                date: date,
+                                from: user.firstname,
+                                title: req.body.title,
+                                content: req.body.content,
+                                imageUrl: `${req.protocol}://${req.get(
+                                    "host"
+                                )}/images/${req.file.filename}`,
+                            })
+                        )
+                        .catch((error) => res.status(400).json({ error }));
+                } else {
+                    const post = new Post({
+                        ...postObject,
+                        userId: req.auth.userId,
+                        from: user.firstname,
+                        date: date,
+                    });
+                    post.save()
+                        .then(() =>
+                            res.status(201).json({
+                                date: date,
+                                from: user.firstname,
+                                title: req.body.title,
+                                content: req.body.content,
+                            })
+                        )
+                        .catch((error) => res.status(400).json({ error }));
+                }
             }
-        }
-    });
+        })
+        .catch((error) => res.status(404).json({ error }));
 };
 
 exports.getAllPosts = (req, res, next) => {
@@ -83,68 +85,58 @@ exports.modifyPost = (req, res, next) => {
               ...req.body,
               imageUrl: "",
           };
-    User.findOne({ isAdmin: 1 }).then((admin) => {
-        Post.findOne({ _id: req.params.id })
-            .then((post) => {
-                if (
-                    req.auth.userId != post.userId &&
-                    req.auth.userId != JSON.parse(JSON.stringify(admin._id))
-                ) {
-                    res.status(403).json({ error: "Non autorisé !" });
-                } else {
-                    if (req.file) {
-                        const filename = post.imageUrl.split("/images/")[1];
-                        fs.unlink(`images/${filename}`, () => {});
-                    }
-                    if (!req.file && post.imageUrl) {
-                        const filename = post.imageUrl.split("/images/")[1];
-                        fs.unlink(`images/${filename}`, () => {});
-                    }
+    Post.findOne({ _id: req.params.id })
+        .then((post) => {
+            if (req.auth.userId != post.userId && req.auth.isAdmin != 1) {
+                res.status(403).json({ error: "Non autorisé !" });
+            } else {
+                if (req.file) {
+                    const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, () => {});
                 }
-                Post.updateOne(
-                    { _id: req.params.id },
-                    { ...postObjet, _id: req.params.id }
-                )
-                    .then(() => {
-                        res.status(200).json({
-                            message: "Publication modifiée !",
-                        });
-                    })
-                    .catch((error) => res.status(400).json({ error }));
-            })
-            .catch((error) => res.status(404).json({ error }));
-    });
+                if (!req.file && post.imageUrl) {
+                    console.log(post.imageUrl);
+                    postObjet.imageUrl = post.imageUrl;
+                    /*const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, () => {});*/
+                }
+            }
+            Post.updateOne(
+                { _id: req.params.id },
+                { ...postObjet, _id: req.params.id }
+            )
+                .then(() => {
+                    res.status(200).json({
+                        message: "Publication modifiée !",
+                    });
+                })
+                .catch((error) => res.status(400).json({ error }));
+        })
+        .catch((error) => res.status(404).json({ error }));
 };
 
 exports.deletePost = (req, res, next) => {
-    User.findOne({ isAdmin: 1 }).then((admin) => {
-        Post.findOne({ _id: req.params.id })
-            .then((post) => {
-                if (
-                    req.auth.userId != post.userId &&
-                    req.auth.userId != JSON.parse(JSON.stringify(admin._id))
-                ) {
-                    res.status(403).json({ error: "Non autorisé !" });
-                } else {
-                    if (post.imageUrl) {
-                        const filename = post.imageUrl.split("/images/")[1];
-                        fs.unlink(`images/${filename}`, (error) => {
-                            if (error) throw error;
-                        });
-                    }
-                    Post.deleteOne({ _id: req.params.id })
-                        .then(() =>
-                            res
-                                .status(204)
-                                .json({ message: "Publication supprimée !" })
-                        )
-                        .catch((error) => res.status(401).json({ error }));
+    Post.findOne({ _id: req.params.id })
+        .then((post) => {
+            if (req.auth.userId != post.userId && req.auth.isAdmin != 1) {
+                res.status(403).json({ error: "Non autorisé !" });
+            } else {
+                if (post.imageUrl) {
+                    const filename = post.imageUrl.split("/images/")[1];
+                    fs.unlink(`images/${filename}`, (error) => {
+                        if (error) throw error;
+                    });
                 }
-            })
-            .catch((error) =>
-                res.status(500).json({ error: "A priori, post est non trouvé" })
-            );
-    });
+                Post.deleteOne({ _id: req.params.id })
+                    .then(() =>
+                        res
+                            .status(204)
+                            .json({ message: "Publication supprimée !" })
+                    )
+                    .catch((error) => res.status(401).json({ error }));
+            }
+        })
+        .catch((error) => res.status(500).json({ error }));
 };
 
 exports.opinionPost = (req, res, next) => {

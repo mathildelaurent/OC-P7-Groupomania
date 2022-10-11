@@ -32,8 +32,52 @@
         }
     }
 
+    #welcome {
+        #menu {
+            flex-direction: column;
+            text-align: center;
+            .btn-menu {
+                margin-top: 5%;
+            }
+        }
+        #posts {
+            #card {
+                #card-container {
+                    h2 {
+                        font-size: 20px;
+                    }
+                    p {
+                        font-size: 12px;
+                    }
+                }
+                #btn {
+                    text-align: center;
+                    #delete-post {
+                        margin-top: 10%;
+                    }
+                }
+                #opinion {
+                    .fa-regular {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    #post-add {
+        #menu {
+            flex-direction: column;
+            text-align: center;
+            .btn-menu {
+                margin-top: 5%;
+            }
+        }
+    }
+
     footer {
         padding-bottom: 5%;
+        padding-top: 5%;
         #nav-footer {
             flex-direction: column;
             padding-bottom: 5%;

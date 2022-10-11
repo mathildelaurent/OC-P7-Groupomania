@@ -7,6 +7,8 @@ export default function PostsCard(props) {
 
     const [toggleLike, setToggleLike] = useState(false);
     const [toggleDislike, setToggleDislike] = useState(false);
+    const [toggleContent, setToggleContent] = useState(false);
+    console.log(toggleContent);
 
     const { storedUsers } = useContext(AuthContext);
 
@@ -127,13 +129,24 @@ export default function PostsCard(props) {
         }
     }
 
+    function handleContent(evt) {
+        if (toggleContent === true) {
+            evt.target.id = "content";
+        } else if (toggleContent === false) {
+            evt.target.id = "content-click";
+        }
+        setToggleContent(!toggleContent);
+    }
+
     return (
         <div id="card">
             <div id="card-container">
                 <p id="user-post">De: {post.from}</p>
                 <p id="creation-date">Date: {date.toLocaleString()}</p>
                 <h2 id="title">{post.title}</h2>
-                <p id="content">{post.content}</p>
+                <p id="content" onClick={(evt) => handleContent(evt)}>
+                    {post.content}
+                </p>
                 <div id="image">
                     <img src={post.imageUrl} alt="" />
                 </div>

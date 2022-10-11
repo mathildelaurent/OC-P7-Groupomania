@@ -1,0 +1,56 @@
+#modify-post {
+    background-color: $color-tertiary;
+    padding: 5%;
+    .btn-menu {
+        width: 20%;
+        text-align: center;
+        margin: auto;
+        background-color: white;
+        padding: 3%;
+        border-radius: 10px 0 10px 0;
+        cursor: pointer;
+        transition: all 450ms;
+        &:hover {
+            transform: scale(1.15);
+            box-shadow: 1px 1px 5px 5px lighten($color-primary, 25);
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+    #creation-form {
+        padding: 5%;
+        .creation-form__item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3%;
+            label {
+                color: white;
+            }
+            input {
+                margin-top: 3%;
+            }
+            textarea {
+                margin-top: 3%;
+            }
+        }
+        #firstImage {
+            display: flex;
+            margin-bottom: 5%;
+            margin-top: 5%;
+            #image {
+                width: 50%;
+                margin: auto;
+            }
+        }
+        #btn-submit {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 20%;
+            border: 1px solid black;
+            @include btn;
+        }
+    }
+}

@@ -8,6 +8,7 @@ module.exports = (req, res, next) => {
         const userIdDecodedToken = decodedToken.userId;
         req.auth = {
             userId: userIdDecodedToken,
+            isAdmin: 1,
         };
         next();
     } catch (error) {

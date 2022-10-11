@@ -35,7 +35,7 @@ export default function PostAdd(props) {
                 return response;
             })
             .then(() => {
-                window.location.href = window.location.href;
+                window.location.href = "./welcome";
             });
     }
 
