@@ -2,24 +2,23 @@
 
 ## Description du projet :
 
-Ce projet consiste à construire un réseau social interne pour les employés de Groupomania. Le but de cet outil est de faciliter les interactions entre collègues. Le département RH de Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues.
-Pour se faire, quelques consignes ont été données:
-=> Aspect graphique :
-Police d’écriture : Lato.
+Ce projet consiste à construire un réseau social interne pour les employés de Groupomania. Le but de cet outil est de faciliter les interactions entre collègues. Le département RH de Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues. Pour se faire, quelques consignes ont été données:  
+=> Aspect graphique :  
+Police d’écriture : Lato.  
 Couleurs :
-● Primaire : #FD2D01
-● Secondaire : #FFD7D7
-● Tertiaire : #4E5166
+
+-   Primaire : #FD2D01
+-   Secondaire : #FFD7D7
+-   Tertiaire : #4E5166
 
 => Aspect technique:
-● Mettre en place le Backend, le Frontend et la base de données;
-● Le projet doit être codé en Javascript;
-● Framework Frontend Javascript obligatoire;
-● Base de données libre de choix;
+
+-   Mettre en place le Backend, le Frontend et la base de données;
+-   Le projet doit être codé en Javascript;
+-   Framework Frontend Javascript obligatoire;
+-   Base de données libre de choix;
 
 ## Lancement du projet Groupomanias
-
-In the project directory, you can run:
 
 ### `Cloner le projet`
 
