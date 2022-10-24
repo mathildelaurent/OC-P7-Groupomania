@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# OpenClassroom Projet n°7
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description du projet :
 
-## Available Scripts
+Ce projet consiste à construire un réseau social interne pour les employés de Groupomania. Le but de cet outil est de faciliter les interactions entre collègues. Le département RH de Groupomania a imaginé plusieurs fonctionnalités pour favoriser les échanges entre collègues.
+Pour se faire, quelques consignes ont été données:
+=> Aspect graphique :
+Police d’écriture : Lato.
+Couleurs :
+● Primaire : #FD2D01
+● Secondaire : #FFD7D7
+● Tertiaire : #4E5166
+
+=> Aspect technique:
+● Mettre en place le Backend, le Frontend et la base de données;
+● Le projet doit être codé en Javascript;
+● Framework Frontend Javascript obligatoire;
+● Base de données libre de choix;
+
+## Lancement du projet Groupomanias
 
 In the project directory, you can run:
 
-### `npm start`
+### `Cloner le projet`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Sur le terminal: git clone https://github.com/mathildelaurent/OC-P7-Groupomania.git.
+Ouvrir le projet dans votre IDE.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `Lancement du backend`
 
-### `npm test`
+Dans le terminal, positionnez-vous dans le fichier Backend puis tapez "nodemon server".
+Vous devriez avoir la confirmation que le Backend est lancé sur le port 3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Lancement du Frontend`
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dans une nouvelle page de terminal, positionnez-vous dans le fichier Frontend puis tapez "npm start".
+Vous devriez avoir la confirmation que le Frontend est lancé sur le port 3001.
