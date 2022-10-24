@@ -34,26 +34,52 @@
 
     #welcome {
         #menu {
-            flex-direction: column;
+            display: none;
+            /* flex-direction: column;
             text-align: center;
             .btn-menu {
                 margin-top: 5%;
-            }
+            }*/
         }
+
+        #menu-mobile {
+            display: flex;
+            justify-content: space-around;
+            width: 30%;
+            margin: auto;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            font-size: 20px;
+        }
+
         #posts {
             #card {
                 #card-container {
-                    h2 {
+                    #title {
                         font-size: 20px;
                     }
-                    p {
-                        font-size: 12px;
+                    #content {
+                        font-size: 15px;
+                    }
+
+                    #content-click {
+                        font-size: 15px;
                     }
                 }
-                #btn {
-                    text-align: center;
-                    #delete-post {
-                        margin-top: 10%;
+                #image-btn {
+                    #btn {
+                        text-align: center;
+                        flex-direction: column;
+                        #boutons {
+                            display: none;
+                        }
+
+                        #boutons-mobile {
+                            display: flex;
+                            justify-content: space-around;
+                            padding-bottom: 5%;
+                            border-bottom: 1px solid black;
+                        }
                     }
                 }
                 #opinion {

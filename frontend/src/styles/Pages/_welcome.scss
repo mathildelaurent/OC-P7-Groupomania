@@ -5,20 +5,40 @@
     #menu {
         @include menu;
         color: black;
+        margin-top: 5%;
+    }
+    #menu-mobile {
+        display: none;
     }
 
     #posts {
         #card {
-            border: 1px solid white;
+            border: 1px solid black;
+            border-radius: 20px;
+            background-color: lighten($color-tertiary, 55);
             padding: 2%;
             margin: 2%;
-            transition: all 450ms;
+            margin-top: 5%;
+            color: black;
+            box-shadow: #d7d7d7 0 0 15px;
+            /* transition: all 450ms;
             &:hover {
                 transform: scale(1.05);
                 box-shadow: #d7d7d7 0 0 15px;
-            }
+            }*/
             #card-container {
+                #creation-date {
+                    border-bottom: 1px solid white;
+                    padding-bottom: 2%;
+                }
+                #title {
+                    margin-top: 3%;
+                    font-size: 28px;
+                    color: $color-primary;
+                }
                 #content {
+                    margin-top: 3%;
+                    font-size: 18px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -26,61 +46,82 @@
                 }
                 #content-click {
                     cursor: pointer;
+                    font-size: 18px;
+                    margin-top: 3%;
                 }
-                #image {
+                #image-btn {
                     display: flex;
-                    margin-top: 5%;
-                    img {
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    #image {
+                        padding-top: 5%;
+                        justify-content: center;
+                        width: 30%;
                         margin: auto;
-                        width: 15%;
+                        img {
+                            width: 100%;
+                        }
+                    }
+                    #btn {
+                        display: flex;
+                        justify-content: center;
+                        margin: auto;
+                        width: 50%;
+                        padding-top: 5%;
+
+                        #boutons {
+                            width: 100%;
+                            text-align: center;
+                            #modify-post {
+                                background-color: rgb(93, 155, 241);
+                                margin-right: 5%;
+                                color: white;
+                                border: none;
+                                padding: 5%;
+                                font-size: 15px;
+                                cursor: pointer;
+                                transition: all 450ms;
+                                &:hover {
+                                    transform: scale(1.13);
+                                }
+                            }
+                            #delete-post {
+                                background-color: rgb(169, 46, 44);
+                                color: white;
+                                border: none;
+                                padding: 5%;
+                                font-size: 15px;
+                                cursor: pointer;
+                                transition: all 450ms;
+                                &:hover {
+                                    transform: scale(1.13);
+                                }
+                            }
+                        }
+                        #boutons-mobile {
+                            display: flex;
+                        }
                     }
                 }
             }
-            #btn {
-                display: block;
-                justify-content: space-around;
-                margin: auto;
-                width: 30%;
-                margin-top: 5%;
-                #modify-post {
-                    background-color: rgb(93, 155, 241);
-                    margin-right: 5%;
-                    color: white;
-                    border: none;
-                    padding: 5%;
-                    font-size: 15px;
-                    cursor: pointer;
-                    transition: all 450ms;
-                    &:hover {
-                        transform: scale(1.13);
-                        //   background-color: darken($color-secondary, 15);
-                        box-shadow: 2px 2px 2px 3px rgb(12, 46, 101);
-                    }
-                }
-                #delete-post {
-                    background-color: rgb(169, 46, 44);
-                    color: white;
-                    border: none;
-                    padding: 5%;
-                    font-size: 15px;
-                    cursor: pointer;
-                    transition: all 450ms;
-                    &:hover {
-                        transform: scale(1.13);
-                        box-shadow: 2px 2px 2px 3px rgb(92, 26, 26);
-                    }
-                }
+            #image-unvisible {
+                display: none;
             }
+
             #unvisible {
                 display: none;
             }
             #opinion {
                 display: flex;
-                margin-top: 5%;
+                padding-top: 5%;
+                width: 30%;
+                justify-content: space-around;
+                margin: auto;
 
                 .fa-regular {
                     font-size: 30px;
-                    margin-left: 5%;
                     cursor: pointer;
                 }
                 .switch-like {
@@ -89,11 +130,9 @@
                 .switch-dislike {
                     color: red;
                 }
-                .opinion-error {
-                    font-size: 12px;
-                    margin-left: auto;
-                    padding-top: 2%;
-                }
+            }
+            #error {
+                text-align: center;
                 #error-like {
                     display: none;
                     font-size: 12px;

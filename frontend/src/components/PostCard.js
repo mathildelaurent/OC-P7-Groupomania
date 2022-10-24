@@ -3,16 +3,36 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function PostsCard(props) {
     const { post } = props;
-    console.log(post);
 
     const [toggleLike, setToggleLike] = useState(false);
     const [toggleDislike, setToggleDislike] = useState(false);
     const [toggleContent, setToggleContent] = useState(false);
-    console.log(toggleContent);
 
     const { storedUsers } = useContext(AuthContext);
 
     const date = new Date(post.date);
+
+    if (
+        (post.imageUrl && post.userId === storedUsers.userId) ||
+        storedUsers.isAdmin === 1
+    ) {
+        console.log("cas n°1");
+    } else if (
+        (post.imageUrl && !post.userId === storedUsers.userId) ||
+        !storedUsers.isAdmin === 1
+    ) {
+        console.log("cas n°2");
+    } else if (
+        (!post.imageUrl && post.userId === storedUsers.userId) ||
+        storedUsers.isAdmin === 1
+    ) {
+        console.log("cas n°3");
+    } else if (
+        (!post.imageUrl && !post.userId === storedUsers.userId) ||
+        !storedUsers.isAdmin === 1
+    ) {
+        console.log("cas n°4");
+    }
 
     function handleModify() {
         window.location.href = `./ModifyPost/${post._id}`;
@@ -139,7 +159,7 @@ export default function PostsCard(props) {
     }
 
     return (
-        <div id="card">
+        <div key={post._id} id="card">
             <div id="card-container">
                 <p id="user-post">De: {post.from}</p>
                 <p id="creation-date">Date: {date.toLocaleString()}</p>
@@ -147,32 +167,58 @@ export default function PostsCard(props) {
                 <p id="content" onClick={(evt) => handleContent(evt)}>
                     {post.content}
                 </p>
-                <div id="image">
-                    <img src={post.imageUrl} alt="" />
+                <div id="image-btn">
+                    <a
+                        href={post.imageUrl}
+                        target="_blank"
+                        id={post.imageUrl ? "image" : "image-unvisible"}
+                    >
+                        <img
+                            src={post.imageUrl}
+                            alt=""
+                            title="Cliquez pour agrandir"
+                        />
+                    </a>
+                    <div
+                        id={
+                            post.userId === storedUsers.userId ||
+                            storedUsers.isAdmin === 1
+                                ? "btn"
+                                : "unvisible"
+                        }
+                    >
+                        <div id="boutons">
+                            <button
+                                id="modify-post"
+                                onClick={() => handleModify()}
+                            >
+                                Modifier
+                            </button>
+                            <button
+                                id="delete-post"
+                                onClick={() => handleDelete()}
+                            >
+                                Supprimer
+                            </button>
+                        </div>
+                        <div id="boutons-mobile">
+                            <i
+                                class="fa-solid fa-pen-to-square"
+                                onClick={() => handleModify()}
+                            ></i>
+                            <i
+                                class="fa-solid fa-trash"
+                                onClick={() => handleDelete()}
+                            ></i>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div
-                id={
-                    post.userId === storedUsers.userId ||
-                    storedUsers.isAdmin === 1
-                        ? "btn"
-                        : "unvisible"
-                }
-            >
-                <button id="modify-post" onClick={() => handleModify()}>
-                    Modifier
-                </button>
-                <button id="delete-post" onClick={() => handleDelete()}>
-                    Supprimer
-                </button>
             </div>
 
             <div id="opinion">
                 <i
                     className={`fa-regular fa-thumbs-up ${
-                        post.usersLiked.includes(
-                            storedUsers.userId
-                        ) /*toggleLike === true*/
+                        post.usersLiked.includes(storedUsers.userId)
                             ? "switch-like"
                             : ""
                     }`}
@@ -180,14 +226,14 @@ export default function PostsCard(props) {
                 ></i>
                 <i
                     className={`fa-regular fa-thumbs-down ${
-                        post.usersDisliked.includes(
-                            storedUsers.userId
-                        ) /*toggleDislike === true*/
+                        post.usersDisliked.includes(storedUsers.userId)
                             ? "switch-dislike"
                             : ""
                     }`}
                     onClick={() => handleOpinionDislike()}
                 ></i>
+            </div>
+            <div id="error">
                 <p id="error-like">
                     Vous avez déjà disliké cette publication !
                 </p>

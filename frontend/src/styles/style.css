@@ -11,6 +11,9 @@ header {
 header a {
   margin: auto;
 }
+header a img {
+  margin: auto;
+}
 
 #connexion {
   background-color: #4e5166;
@@ -47,7 +50,6 @@ header a {
 #connexion #choice .choice-btn:hover {
   transform: scale(1.13);
   background-color: #ff8b8b;
-  box-shadow: 2px 2px 2px 3px #491e1e;
 }
 #connexion #choice .choice-btn a {
   text-decoration: none;
@@ -105,7 +107,6 @@ header a {
 #connexion .connexion-form #connexion-form__submit:hover {
   transform: scale(1.13);
   background-color: #ff8b8b;
-  box-shadow: 2px 2px 2px 3px #491e1e;
 }
 
 #post-add {
@@ -165,7 +166,6 @@ header a {
 #post-add #creation-form #btn-submit:hover {
   transform: scale(1.13);
   background-color: #ff8b8b;
-  box-shadow: 2px 2px 2px 3px #491e1e;
 }
 
 #welcome {
@@ -180,6 +180,7 @@ header a {
   margin: auto;
   padding-bottom: 5%;
   color: black;
+  margin-top: 5%;
 }
 #welcome #menu .btn-menu {
   background-color: white;
@@ -196,17 +197,36 @@ header a {
   text-decoration: none;
   color: black;
 }
+#welcome #menu-mobile {
+  display: none;
+}
 #welcome #posts #card {
-  border: 1px solid white;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: #e3e4ea;
   padding: 2%;
   margin: 2%;
-  transition: all 450ms;
-}
-#welcome #posts #card:hover {
-  transform: scale(1.05);
+  margin-top: 5%;
+  color: black;
   box-shadow: #d7d7d7 0 0 15px;
+  /* transition: all 450ms;
+  &:hover {
+      transform: scale(1.05);
+      box-shadow: #d7d7d7 0 0 15px;
+  }*/
+}
+#welcome #posts #card #card-container #creation-date {
+  border-bottom: 1px solid white;
+  padding-bottom: 2%;
+}
+#welcome #posts #card #card-container #title {
+  margin-top: 3%;
+  font-size: 28px;
+  color: #fd2d01;
 }
 #welcome #posts #card #card-container #content {
+  margin-top: 3%;
+  font-size: 18px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -214,23 +234,37 @@ header a {
 }
 #welcome #posts #card #card-container #content-click {
   cursor: pointer;
+  font-size: 18px;
+  margin-top: 3%;
 }
-#welcome #posts #card #card-container #image {
+#welcome #posts #card #card-container #image-btn {
   display: flex;
-  margin-top: 5%;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
 }
-#welcome #posts #card #card-container #image img {
-  margin: auto;
-  width: 15%;
-}
-#welcome #posts #card #btn {
-  display: block;
-  justify-content: space-around;
-  margin: auto;
+#welcome #posts #card #card-container #image-btn #image {
+  padding-top: 5%;
+  justify-content: center;
   width: 30%;
-  margin-top: 5%;
+  margin: auto;
 }
-#welcome #posts #card #btn #modify-post {
+#welcome #posts #card #card-container #image-btn #image img {
+  width: 100%;
+}
+#welcome #posts #card #card-container #image-btn #btn {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 50%;
+  padding-top: 5%;
+}
+#welcome #posts #card #card-container #image-btn #btn #boutons {
+  width: 100%;
+  text-align: center;
+}
+#welcome #posts #card #card-container #image-btn #btn #boutons #modify-post {
   background-color: #5d9bf1;
   margin-right: 5%;
   color: white;
@@ -240,11 +274,10 @@ header a {
   cursor: pointer;
   transition: all 450ms;
 }
-#welcome #posts #card #btn #modify-post:hover {
+#welcome #posts #card #card-container #image-btn #btn #boutons #modify-post:hover {
   transform: scale(1.13);
-  box-shadow: 2px 2px 2px 3px #0c2e65;
 }
-#welcome #posts #card #btn #delete-post {
+#welcome #posts #card #card-container #image-btn #btn #boutons #delete-post {
   background-color: #a92e2c;
   color: white;
   border: none;
@@ -253,20 +286,27 @@ header a {
   cursor: pointer;
   transition: all 450ms;
 }
-#welcome #posts #card #btn #delete-post:hover {
+#welcome #posts #card #card-container #image-btn #btn #boutons #delete-post:hover {
   transform: scale(1.13);
-  box-shadow: 2px 2px 2px 3px #5c1a1a;
+}
+#welcome #posts #card #card-container #image-btn #btn #boutons-mobile {
+  display: flex;
+}
+#welcome #posts #card #image-unvisible {
+  display: none;
 }
 #welcome #posts #card #unvisible {
   display: none;
 }
 #welcome #posts #card #opinion {
   display: flex;
-  margin-top: 5%;
+  padding-top: 5%;
+  width: 30%;
+  justify-content: space-around;
+  margin: auto;
 }
 #welcome #posts #card #opinion .fa-regular {
   font-size: 30px;
-  margin-left: 5%;
   cursor: pointer;
 }
 #welcome #posts #card #opinion .switch-like {
@@ -275,18 +315,16 @@ header a {
 #welcome #posts #card #opinion .switch-dislike {
   color: red;
 }
-#welcome #posts #card #opinion .opinion-error {
-  font-size: 12px;
-  margin-left: auto;
-  padding-top: 2%;
+#welcome #posts #card #error {
+  text-align: center;
 }
-#welcome #posts #card #opinion #error-like {
+#welcome #posts #card #error #error-like {
   display: none;
   font-size: 12px;
   margin-left: auto;
   padding-top: 2%;
 }
-#welcome #posts #card #opinion #error-dislike {
+#welcome #posts #card #error #error-dislike {
   display: none;
   font-size: 12px;
   margin-left: auto;
@@ -355,7 +393,6 @@ header a {
 #modify-post #creation-form #btn-submit:hover {
   transform: scale(1.13);
   background-color: #ff8b8b;
-  box-shadow: 2px 2px 2px 3px #491e1e;
 }
 
 #userPost {
@@ -461,10 +498,8 @@ header a {
   border-radius: 10px 0 10px 0;
   cursor: pointer;
   transition: all 450ms;
-}
-#mentions-legales #btn-menu a {
-  text-decoration: none;
   color: black;
+  text-decoration: none;
 }
 #mentions-legales #btn-menu:hover {
   transform: scale(1.15);
@@ -539,23 +574,43 @@ footer #copyright {
   }
 
   #welcome #menu {
-    flex-direction: column;
+    display: none;
+    /* flex-direction: column;
     text-align: center;
+    .btn-menu {
+        margin-top: 5%;
+    }*/
   }
-  #welcome #menu .btn-menu {
-    margin-top: 5%;
-  }
-  #welcome #posts #card #card-container h2 {
+  #welcome #menu-mobile {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    margin: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
     font-size: 20px;
   }
-  #welcome #posts #card #card-container p {
-    font-size: 12px;
+  #welcome #posts #card #card-container #title {
+    font-size: 20px;
   }
-  #welcome #posts #card #btn {
+  #welcome #posts #card #card-container #content {
+    font-size: 15px;
+  }
+  #welcome #posts #card #card-container #content-click {
+    font-size: 15px;
+  }
+  #welcome #posts #card #image-btn #btn {
     text-align: center;
+    flex-direction: column;
   }
-  #welcome #posts #card #btn #delete-post {
-    margin-top: 10%;
+  #welcome #posts #card #image-btn #btn #boutons {
+    display: none;
+  }
+  #welcome #posts #card #image-btn #btn #boutons-mobile {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 5%;
+    border-bottom: 1px solid black;
   }
   #welcome #posts #card #opinion .fa-regular {
     font-size: 20px;

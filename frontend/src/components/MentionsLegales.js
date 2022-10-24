@@ -12,7 +12,7 @@ export default function MentionsLegales() {
                     Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans
                     l'économie numérique, dite L.C.E.N., nous portons à la
                     connaissance des utilisateurs et visiteurs du site :{" "}
-                    <a href="http://localhost:3001" className="link">
+                    <a href="www.groupomania.com" className="link">
                         groupomania.com
                     </a>{" "}
                     les informations suivantes :
@@ -23,7 +23,7 @@ export default function MentionsLegales() {
                     <br />
                     <p>
                         Le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>
                          est la propriété exclusive de 
@@ -76,13 +76,13 @@ export default function MentionsLegales() {
                     </p>
                     <p>
                         Le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         a pour objet de fournir une information concernant
                         l’ensemble des activités de la société. Le proprietaire
                         du site s’efforce de fournir sur le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         des informations aussi précises que possible. Toutefois,
@@ -91,7 +91,7 @@ export default function MentionsLegales() {
                         qu’elles soient de son fait ou du fait des tiers
                         partenaires qui lui fournissent ces informations. Tous
                         les informations proposées sur le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         sont données à titre indicatif, sont non exhaustives, et
@@ -131,7 +131,7 @@ export default function MentionsLegales() {
                     <br />
                     <p>
                         Le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         contient un certain nombre de liens hypertextes vers
@@ -143,7 +143,7 @@ export default function MentionsLegales() {
                         quand aux risques éventuels de contenus illicites.
                         L’utilisateur est informé que lors de ses visites sur le
                         site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>
                         , un ou des cookies sont susceptible de s’installer
@@ -179,7 +179,7 @@ export default function MentionsLegales() {
                     <p>
                         Utilisateur : Internaute se connectant, utilisant le
                         site susnommé :{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         En France, les données personnelles sont notamment
@@ -189,20 +189,20 @@ export default function MentionsLegales() {
                     </p>
                     <p>
                         Sur le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>
                         , le proprietaire du site ne collecte des informations
                         personnelles relatives à l'utilisateur que pour le
                         besoin de certains services proposés par le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>
                         . L'utilisateur fournit ces informations en toute
                         connaissance de cause, notamment lorsqu'il procède par
                         lui-même à leur saisie. Il est alors précisé à
                         l'utilisateur du site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         l’obligation ou non de fournir ces informations.
@@ -213,7 +213,7 @@ export default function MentionsLegales() {
                         rectification, de suppression et d’opposition aux
                         données personnelles le concernant. Pour l’exercer,
                         adressez votre demande à{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         par email : email du webmaster ou  en effectuant sa
@@ -224,13 +224,13 @@ export default function MentionsLegales() {
                     </p>
                     <p>
                         Aucune information personnelle de l'utilisateur du site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         n'est publiée à l'insu de l'utilisateur, échangée,
                         transférée, cédée ou vendue sur un support quelconque à
                         des tiers. Seule l'hypothèse du rachat du site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         à le propriétaire du site et de ses droits permettrait
@@ -238,14 +238,14 @@ export default function MentionsLegales() {
                         acquéreur qui serait à son tour tenu de la même
                         obligation de conservation et de modification des
                         données vis à vis de l'utilisateur du site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>
                         .
                     </p>
                     <p>
                         Le site{" "}
-                        <a href="http://localhost:3001" className="link">
+                        <a href="www.groupomania.com" className="link">
                             groupomania.com
                         </a>{" "}
                         est en conformité avec le RGPD voir notre politique

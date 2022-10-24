@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default function ModifyPost() {
     const { id } = useParams();
     const { storedUsers } = useContext(AuthContext);
-    const [data, setData] = useState([]);
+    //const [data, setData] = useState([]);
     const [newFile, setNewFile] = useState();
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
@@ -33,7 +33,7 @@ export default function ModifyPost() {
             const dataResponse = await response.json();
 
             if (response.ok) {
-                setData(dataResponse);
+                //  setData(dataResponse);
                 setTitle(dataResponse.title);
                 setContent(dataResponse.content);
                 setImageUrl(dataResponse.imageUrl);
@@ -67,13 +67,6 @@ export default function ModifyPost() {
                 .getElementById("firstImage")
                 .parentNode.removeChild(document.getElementById("firstImage"));
         }
-    }
-
-    function handleClose() {
-        document
-            .getElementById("firstImage")
-            .parentNode.removeChild(document.getElementById("firstImage"));
-        setImageUrl("");
     }
 
     function handleSubmit(evt) {
@@ -139,10 +132,6 @@ export default function ModifyPost() {
                 </div>
                 <div id="firstImage">
                     <img src={imageUrl} id="image" name="image" alt=""></img>
-                    <i
-                        class={imageUrl ? "fa-regular fa-rectangle-xmark" : ""}
-                        onClick={() => handleClose()}
-                    ></i>
                 </div>
                 <div className="creation-form__item">
                     <label htmlFor="image">Ajouter une image</label>

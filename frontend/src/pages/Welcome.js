@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "../hooks/useLocalStorage";
 import PostCard from "../components/PostCard";
 
@@ -13,6 +14,10 @@ export default function Welcome() {
         STORAGE_KEY_POSTS,
         []
     );
+
+    if (!storedUsers.token) {
+        window.location.href = "/";
+    }
 
     const fetchHandler = useCallback(async () => {
         try {
@@ -41,13 +46,18 @@ export default function Welcome() {
     }, [fetchHandler]);
 
     function handleLogOut() {
-        console.log(storedUsers);
         userLogged({
             firstname: "",
             token: "",
             userId: "",
+            lastname: "",
+            job: "",
+            isAdmin: "",
         });
-        window.location.href = "./";
+    }
+
+    function handleAddPost() {
+        window.location.href = "/postadd";
     }
 
     return (
@@ -56,19 +66,21 @@ export default function Welcome() {
             <h4>Bienvenue {storedUsers.firstname}</h4>
 
             <div id="menu">
-                <p className="btn-menu">
-                    <NavLink
-                        to="/postadd"
-                        className={({ isActive }) =>
-                            isActive ? "activeLink" : "undefined"
-                        }
-                    >
-                        Créer une publication
-                    </NavLink>
-                </p>
-                <p className="btn-menu" onClick={() => handleLogOut()}>
+                <a className="btn-menu" onClick={() => handleAddPost()}>
+                    Créer une publication
+                </a>
+
+                <a className="btn-menu" onClick={() => handleLogOut()}>
                     Se déconnecter
-                </p>
+                </a>
+            </div>
+            <div id="menu-mobile">
+                <i class="fa-solid fa-plus" onClick={() => handleAddPost()}></i>
+
+                <i
+                    class="fa-solid fa-right-from-bracket"
+                    onClick={() => handleLogOut()}
+                ></i>
             </div>
 
             <div id="posts">
