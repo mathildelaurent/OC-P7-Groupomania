@@ -65,20 +65,21 @@
                     #content-click {
                         font-size: 15px;
                     }
-                }
-                #image-btn {
-                    #btn {
-                        text-align: center;
-                        flex-direction: column;
-                        #boutons {
-                            display: none;
-                        }
 
-                        #boutons-mobile {
-                            display: flex;
-                            justify-content: space-around;
-                            padding-bottom: 5%;
-                            border-bottom: 1px solid black;
+                    #image-btn {
+                        #btn {
+                            text-align: center;
+                            flex-direction: column;
+                            #boutons {
+                                display: none;
+                            }
+
+                            #boutons-mobile {
+                                display: flex;
+                                justify-content: space-around;
+                                padding-bottom: 5%;
+                                border-bottom: 1px solid black;
+                            }
                         }
                     }
                 }

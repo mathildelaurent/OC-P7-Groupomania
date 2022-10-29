@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Login(props) {
-    const { handleLogin } = props;
+export default function Login() {
     const { user } = useContext(AuthContext);
-    const { storedUsers } = useContext(AuthContext);
     const { userLogged } = useContext(AuthContext);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -34,11 +32,6 @@ export default function Login(props) {
             });
     }
 
-    function handleChange(evt) {
-        const { name, value } = evt.target;
-        //   setUser({ ...user, [name]: value });
-    }
-
     function handleVisible() {
         setIsVisible(!isVisible);
     }
@@ -58,7 +51,6 @@ export default function Login(props) {
                         name="email"
                         id="email"
                         value={user.email}
-                        onChange={(evt) => handleChange(evt)}
                         required
                     />
                     <p id="emailError"></p>
@@ -71,7 +63,6 @@ export default function Login(props) {
                         name="password"
                         id="password"
                         value={user.password}
-                        onChange={(evt) => handleChange(evt)}
                         required
                     />
                     <i

@@ -19,7 +19,6 @@ export default function Signup() {
                 return response.json();
             })
             .then((datas) => {
-                console.log(datas);
                 window.location.href = "/login";
             });
     }
@@ -79,19 +78,6 @@ export default function Signup() {
                     <label htmlFor="password">Mot de passe : </label>
                     <input type="text" name="password" id="password" required />
                     <p id="passwordError"></p>
-                </div>
-
-                <div className="connexion-form_item">
-                    <label htmlFor="passwordConfirmation">
-                        Confirmation du mot de passe :{" "}
-                    </label>
-                    <input
-                        type="text"
-                        name="passwordConfirmation"
-                        id="passwordConfirmation"
-                        required
-                    />
-                    <p id="passwordConfirmationError"></p>
                 </div>
                 <button type="submit" id="connexion-form__submit">
                     S'inscrire

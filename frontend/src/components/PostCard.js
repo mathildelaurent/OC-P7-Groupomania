@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import nl2br from "react-nl2br";
 
 export default function PostsCard(props) {
     const { post } = props;
@@ -16,22 +17,18 @@ export default function PostsCard(props) {
         (post.imageUrl && post.userId === storedUsers.userId) ||
         storedUsers.isAdmin === 1
     ) {
-        console.log("cas n°1");
     } else if (
         (post.imageUrl && !post.userId === storedUsers.userId) ||
         !storedUsers.isAdmin === 1
     ) {
-        console.log("cas n°2");
     } else if (
         (!post.imageUrl && post.userId === storedUsers.userId) ||
         storedUsers.isAdmin === 1
     ) {
-        console.log("cas n°3");
     } else if (
         (!post.imageUrl && !post.userId === storedUsers.userId) ||
         !storedUsers.isAdmin === 1
     ) {
-        console.log("cas n°4");
     }
 
     function handleModify() {
@@ -75,7 +72,7 @@ export default function PostsCard(props) {
                     Authorization: `Bearer ${storedUsers.token}`,
                 },
                 body: JSON.stringify({ like: 1 }),
-            }).then((response) => {
+            }).then(() => {
                 setToggleLike(!toggleLike);
                 post.usersLiked.push(storedUsers.userId);
             });
@@ -139,7 +136,6 @@ export default function PostsCard(props) {
                 },
                 body: JSON.stringify({ like: 0 }),
             }).then((response) => {
-                console.log(response);
                 document.getElementById("error-like").style.display = "none";
                 setToggleDislike(!toggleDislike);
                 post.usersDisliked = post.usersDisliked.filter(
@@ -165,7 +161,7 @@ export default function PostsCard(props) {
                 <p id="creation-date">Date: {date.toLocaleString()}</p>
                 <h2 id="title">{post.title}</h2>
                 <p id="content" onClick={(evt) => handleContent(evt)}>
-                    {post.content}
+                    {nl2br(post.content)}
                 </p>
                 <div id="image-btn">
                     <a
@@ -203,11 +199,11 @@ export default function PostsCard(props) {
                         </div>
                         <div id="boutons-mobile">
                             <i
-                                class="fa-solid fa-pen-to-square"
+                                className="fa-solid fa-pen-to-square"
                                 onClick={() => handleModify()}
                             ></i>
                             <i
-                                class="fa-solid fa-trash"
+                                className="fa-solid fa-trash"
                                 onClick={() => handleDelete()}
                             ></i>
                         </div>
@@ -233,7 +229,7 @@ export default function PostsCard(props) {
                     onClick={() => handleOpinionDislike()}
                 ></i>
             </div>
-            <div id="error">
+            <div className="error">
                 <p id="error-like">
                     Vous avez déjà disliké cette publication !
                 </p>

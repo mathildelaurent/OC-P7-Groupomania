@@ -95,10 +95,7 @@ exports.modifyPost = (req, res, next) => {
                     fs.unlink(`images/${filename}`, () => {});
                 }
                 if (!req.file && post.imageUrl) {
-                    console.log(post.imageUrl);
                     postObjet.imageUrl = post.imageUrl;
-                    /*const filename = post.imageUrl.split("/images/")[1];
-                    fs.unlink(`images/${filename}`, () => {});*/
                 }
             }
             Post.updateOne(

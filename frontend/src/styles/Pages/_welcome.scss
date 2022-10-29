@@ -101,7 +101,7 @@
                             }
                         }
                         #boutons-mobile {
-                            display: flex;
+                            display: none;
                         }
                     }
                 }
@@ -131,7 +131,7 @@
                     color: red;
                 }
             }
-            #error {
+            .error {
                 text-align: center;
                 #error-like {
                     display: none;

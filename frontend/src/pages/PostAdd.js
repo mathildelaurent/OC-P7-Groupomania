@@ -4,9 +4,8 @@ import { AuthContext } from "../context/AuthContext";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-export default function PostAdd(props) {
+export default function PostAdd() {
     const { storedUsers } = useContext(AuthContext);
-    console.log(storedUsers);
 
     const [post, setPost] = useState({
         title: "",
@@ -45,8 +44,6 @@ export default function PostAdd(props) {
     }
 
     function handleChangeFile(evt) {
-        console.log(evt);
-        console.log(evt.target.files[0]);
         if (evt.target && evt.target.files[0]) {
             setFile(evt.target.files[0]);
         }

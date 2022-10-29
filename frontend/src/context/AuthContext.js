@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
     const [user, setUser] = useState({});
-    console.log(user);
 
     const STORAGE_KEY_USERS = "users";
     const [storedUsers, setStoredUsers] = useLocalStorage(

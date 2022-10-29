@@ -290,7 +290,7 @@ header a img {
   transform: scale(1.13);
 }
 #welcome #posts #card #card-container #image-btn #btn #boutons-mobile {
-  display: flex;
+  display: none;
 }
 #welcome #posts #card #image-unvisible {
   display: none;
@@ -315,16 +315,16 @@ header a img {
 #welcome #posts #card #opinion .switch-dislike {
   color: red;
 }
-#welcome #posts #card #error {
+#welcome #posts #card .error {
   text-align: center;
 }
-#welcome #posts #card #error #error-like {
+#welcome #posts #card .error #error-like {
   display: none;
   font-size: 12px;
   margin-left: auto;
   padding-top: 2%;
 }
-#welcome #posts #card #error #error-dislike {
+#welcome #posts #card .error #error-dislike {
   display: none;
   font-size: 12px;
   margin-left: auto;
@@ -393,93 +393,6 @@ header a img {
 #modify-post #creation-form #btn-submit:hover {
   transform: scale(1.13);
   background-color: #ff8b8b;
-}
-
-#userPost {
-  background-color: #4e5166;
-  color: white;
-  padding: 5%;
-}
-#userPost .btn-menu {
-  text-align: center;
-  width: 15%;
-  margin: auto;
-  background-color: white;
-  padding: 2%;
-  border-radius: 10px 0 10px 0;
-  cursor: pointer;
-  transition: all 450ms;
-}
-#userPost .btn-menu:hover {
-  transform: scale(1.15);
-  box-shadow: 1px 1px 5px 5px #fe957f;
-}
-#userPost .btn-menu a {
-  text-decoration: none;
-  color: black;
-}
-#userPost #title {
-  font-size: 40px;
-  text-align: center;
-  margin-top: 5%;
-  border-bottom: 1px solid white;
-}
-#userPost #content {
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-#userPost img {
-  display: flex;
-  width: 30%;
-  margin: auto;
-}
-#userPost #btn {
-  display: flex;
-  justify-content: space-around;
-  margin: auto;
-  width: 30%;
-  margin-top: 5%;
-}
-#userPost #btn #modify-post {
-  background-color: #5d9bf1;
-  color: white;
-  border: none;
-  padding: 5%;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 450ms;
-}
-#userPost #btn #modify-post:hover {
-  transform: scale(1.13);
-  box-shadow: 2px 2px 2px 3px #0c2e65;
-}
-#userPost #btn #delete-post {
-  background-color: #a92e2c;
-  color: white;
-  border: none;
-  padding: 5%;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 450ms;
-}
-#userPost #btn #delete-post:hover {
-  transform: scale(1.13);
-  box-shadow: 2px 2px 2px 3px #5c1a1a;
-}
-#userPost #opinion {
-  display: flex;
-  margin-top: 5%;
-}
-#userPost #opinion .fa-regular {
-  font-size: 30px;
-  margin-left: 5%;
-  cursor: pointer;
-}
-#userPost #opinion .switch-like {
-  color: green;
-}
-#userPost #opinion .switch-dislike {
-  color: red;
 }
 
 #mentions-legales {
@@ -599,14 +512,14 @@ footer #copyright {
   #welcome #posts #card #card-container #content-click {
     font-size: 15px;
   }
-  #welcome #posts #card #image-btn #btn {
+  #welcome #posts #card #card-container #image-btn #btn {
     text-align: center;
     flex-direction: column;
   }
-  #welcome #posts #card #image-btn #btn #boutons {
+  #welcome #posts #card #card-container #image-btn #btn #boutons {
     display: none;
   }
-  #welcome #posts #card #image-btn #btn #boutons-mobile {
+  #welcome #posts #card #card-container #image-btn #btn #boutons-mobile {
     display: flex;
     justify-content: space-around;
     padding-bottom: 5%;

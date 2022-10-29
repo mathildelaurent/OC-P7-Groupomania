@@ -17,17 +17,6 @@ exports.signup = (req, res, next) => {
                 password: hash,
                 isAdmin: 0,
             });
-            console.log(user);
-            /* let emailRegExp = new RegExp(
-                "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
-            );
-            let testEmail = emailRegExp.test(req.body.email);
-
-            if (testEmail === false) {
-                return res
-                    .status(401)
-                    .json({ error: "Adresse mail non valide !" });
-            } else {*/
             user.save()
                 .then(() =>
                     res.status(201).json({
@@ -36,7 +25,6 @@ exports.signup = (req, res, next) => {
                     })
                 )
                 .catch((error) => res.status(409).json({ error }));
-            //}
         })
         .catch((error) => res.status(500).json({ error }));
 };

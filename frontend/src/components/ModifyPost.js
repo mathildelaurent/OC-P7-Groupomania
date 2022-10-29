@@ -6,12 +6,10 @@ import { NavLink } from "react-router-dom";
 export default function ModifyPost() {
     const { id } = useParams();
     const { storedUsers } = useContext(AuthContext);
-    //const [data, setData] = useState([]);
     const [newFile, setNewFile] = useState();
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
     const [imageUrl, setImageUrl] = useState();
-    console.log(imageUrl);
 
     const formData = new FormData();
     formData.append("title", title);
@@ -33,7 +31,6 @@ export default function ModifyPost() {
             const dataResponse = await response.json();
 
             if (response.ok) {
-                //  setData(dataResponse);
                 setTitle(dataResponse.title);
                 setContent(dataResponse.content);
                 setImageUrl(dataResponse.imageUrl);
@@ -59,9 +56,7 @@ export default function ModifyPost() {
     }
 
     function handleChangeFile(evt) {
-        console.log(evt);
-        console.log(evt.target.files);
-        if (/*evt.target && */ evt.target.files[0]) {
+        if (evt.target.files[0]) {
             setNewFile(evt.target.files[0]);
             document
                 .getElementById("firstImage")
@@ -83,13 +78,12 @@ export default function ModifyPost() {
                 return response.json();
             })
             .then((datas) => {
-                console.log(datas);
                 window.location.href = "http://localhost:3001/welcome";
             });
     }
 
     return (
-        <body id="modify-post">
+        <div id="modify-post">
             <p className="btn-menu">
                 <NavLink
                     to="/welcome"
@@ -148,6 +142,6 @@ export default function ModifyPost() {
                     Publier
                 </button>
             </form>
-        </body>
+        </div>
     );
 }

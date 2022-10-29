@@ -12,11 +12,11 @@ const postRoutes = require("./routes/post");
 const path = require("path");
 const user = require("./models/user");
 
-//const limiter = rateLimit({
-//  max: 200,
-//windowMs: 60 * 60 * 1000,
-//message: "Too many requests from this IP",
-//});
+const limiter = rateLimit({
+    max: 200,
+    windowMs: 60 * 60 * 1000,
+    message: "Too many requests from this IP",
+});
 
 mongoose
     .connect(process.env.connexionMongoDB, {
@@ -28,7 +28,7 @@ mongoose
 
 app.use(express.json());
 app.use(helmet());
-//app.use(limiter);
+app.use(limiter);
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");

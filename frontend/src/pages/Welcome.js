@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { v4 as uuidv4 } from "uuid";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -7,7 +6,6 @@ import PostCard from "../components/PostCard";
 
 export default function Welcome() {
     const { storedUsers } = useContext(AuthContext);
-    const [data, setData] = useState([]);
     const { userLogged } = useContext(AuthContext);
     const STORAGE_KEY_POSTS = "posts";
     const [storedPosts, setStoredPosts] = useLocalStorage(
@@ -75,19 +73,22 @@ export default function Welcome() {
                 </a>
             </div>
             <div id="menu-mobile">
-                <i class="fa-solid fa-plus" onClick={() => handleAddPost()}></i>
+                <i
+                    className="fa-solid fa-plus"
+                    onClick={() => handleAddPost()}
+                ></i>
 
                 <i
-                    class="fa-solid fa-right-from-bracket"
+                    className="fa-solid fa-right-from-bracket"
                     onClick={() => handleLogOut()}
                 ></i>
             </div>
 
             <div id="posts">
                 {storedPosts.map((post) => (
-                    <PostCard post={post} />
+                    <PostCard key={uuidv4()} post={post} />
                 ))}
             </div>
         </section>
-    ); // fin du return
-} // fin function Welcome
+    );
+}
