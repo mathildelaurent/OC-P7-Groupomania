@@ -58,7 +58,7 @@ export default function PostsCard(props) {
             !post.usersLiked.includes(storedUsers.userId) &&
             post.usersDisliked.includes(storedUsers.userId)
         ) {
-            document.getElementById("error-like").style.display = "block";
+            // document.getElementById("error-like").style.display = "block";
         }
 
         if (
@@ -90,7 +90,7 @@ export default function PostsCard(props) {
                 },
                 body: JSON.stringify({ like: 0 }),
             }).then((response) => {
-                document.getElementById("error-dislike").style.display = "none";
+                // document.getElementById("error-dislike").style.display = "none";
                 setToggleLike(!toggleLike);
                 post.usersLiked = post.usersLiked.filter(
                     (user) => user !== storedUsers.userId
@@ -104,7 +104,7 @@ export default function PostsCard(props) {
             !post.usersDisliked.includes(storedUsers.userId) &&
             post.usersLiked.includes(storedUsers.userId)
         ) {
-            document.getElementById("error-dislike").style.display = "block";
+            //  document.getElementById("error-dislike").style.display = "block";
         }
 
         if (
@@ -136,7 +136,7 @@ export default function PostsCard(props) {
                 },
                 body: JSON.stringify({ like: 0 }),
             }).then((response) => {
-                document.getElementById("error-like").style.display = "none";
+                //  document.getElementById("error-like").style.display = "none";
                 setToggleDislike(!toggleDislike);
                 post.usersDisliked = post.usersDisliked.filter(
                     (user) => user !== storedUsers.userId
@@ -228,14 +228,6 @@ export default function PostsCard(props) {
                     }`}
                     onClick={() => handleOpinionDislike()}
                 ></i>
-            </div>
-            <div className="error">
-                <p id="error-like">
-                    Vous avez déjà disliké cette publication !
-                </p>
-                <p id="error-dislike">
-                    Vous avez déjà liké cette publication !
-                </p>
             </div>
         </div>
     );
